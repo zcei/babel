@@ -272,6 +272,11 @@ t.isReferenced = function (node, parent) {
     }
   }
 
+  // no: <div NODE="" />
+  if (t.isJSXAttribute(parent)) {
+    return false;
+  }
+
   // yes: { [NODE]: "" }
   // no: { NODE: "" }
   if (t.isProperty(parent) && parent.key === node) {
@@ -870,7 +875,11 @@ t.isScope = function (node, parent) {
  * @returns {Boolean}
  */
 
+var _isImmutable = t.isImmutable;
+
 t.isImmutable = function (node) {
+  if (_isImmutable(node)) return true;
+
   if (t.isLiteral(node)) {
     if (node.regex) {
       // regexes are mutable

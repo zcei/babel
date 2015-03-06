@@ -88,6 +88,10 @@ export default class TraversalPath {
     this.context.flatten();
   }
 
+  traverse(opts, state) {
+    traverse(this.node, opts, this.scope, state);
+  }
+
   get node() {
     return this.container[this.key];
   }

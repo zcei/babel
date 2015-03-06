@@ -6,6 +6,8 @@ export default {
   "validation.undeclaredVariableCheck":    require("./validation/undeclared-variable-check"),
   "validation.react":                      require("./validation/react"),
 
+  "optimisation.react":                    require("./optimisation/react"),
+
   // this goes at the start so we only transform the original user code
   "spec.functionName":                     require("./spec/function-name"),
 
