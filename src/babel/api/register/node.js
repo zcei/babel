@@ -76,9 +76,18 @@ var compile = function (filename) {
   return result.code;
 };
 
+var test = function (regex, filename) {
+  var matched = false;
+  var iteratee = function (regex) {
+    matched = matched || regex.test(filename);
+  };
+
+  return Array.isArray(regex) ? each(regex, iteratee) : regex.test(filename);
+};
+
 var shouldIgnore = function (filename) {
   filename = slash(filename);
-  return (ignoreRegex && ignoreRegex.test(filename)) || (onlyRegex && !onlyRegex.test(filename));
+  return (ignoreRegex && test(ignoreRegex, filename)) || (onlyRegex && !test(onlyRegex, filename));
 };
 
 var istanbulMonkey = {};
